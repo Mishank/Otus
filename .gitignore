@@ -1,6 +1,11 @@
 .idea/
+<<<<<<< HEAD
 .iml/
 target/
+=======
+.iml
+/target
+>>>>>>> d990cff5b1373bee00a9483ed15fa095dd0a03b7
 
 # Mac
 .DS_Store
@@ -12,4 +17,8 @@ target/
 #Gradle
 /build/
 /gradle/
+<<<<<<< HEAD
 .gradle/
+=======
+/.gradle/
+>>>>>>> d990cff5b1373bee00a9483ed15fa095dd0a03b7

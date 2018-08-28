@@ -1,15 +1,15 @@
-**/.idea
-**.iml
-**/target
+/.idea
+.iml
+/target
 
 # Mac
 .DS_Store
   
 # Maven
-**/log/
-**/target/
+/log/
+/target/
 
 #Gradle
-**/build/
-**/gradle/
-**/.gradle/
+/build/
+/gradle/
+/.gradle/

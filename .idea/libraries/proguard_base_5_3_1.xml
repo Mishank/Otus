@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="proguard-base-5.3.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/proguard/proguard-base-5.3.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

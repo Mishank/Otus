@@ -43,3 +43,14 @@ VM Options: -Xmx512m -Xms512m
 ```bash
 A)Memory
 ```
+### Lesson 5-ArrayList 
+```bash
+Check Home Work L-5
+mvn package
+```
+### Lesson 6-Collections (Lecture)
+
+```bash
+• java.util.Collections
+```
+

@@ -3,84 +3,83 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.NoSuchElementException;
 import java.util.Arrays;
 
-public class MyArrayList<E> implements List<E> {
+public class MyArrayList<E> implements List<E> { //создадим и унаследуем от интерфейса List реализуем его методы
 
-    private static final Object[] EMPTY_LIST = {};
-    private static final int CAPACITY_INCREMENT = 10;
+    private static final Object[] EMPTY_LIST = {}; // создаем массив обьектов EMPTY_LIST неизменяемый
+    private static final int CAPACITY_INCREMENT = 10;// создаем неизменяемую велечину
 
-    private Object[] elements;
-    private int size;
+    private Object[] elements; // Массив обьектов где elements ссылка
+    private int size; // Целочисленная переменная , размер
 
     public MyArrayList() {
-        elements = EMPTY_LIST;
+        elements = EMPTY_LIST; // Если на вход MyArrayList не получает значения то создаем пустой
     }
 
-    public MyArrayList(int capacity) {
-        if (capacity > 0) {
-            elements = new Object[capacity];
-        } else if (capacity == 0) {
-            elements = EMPTY_LIST;
-        } else {
+    public MyArrayList(int capacity) {        //передаем на вход целочиленный capacity в диапозоне 32 бит
+        if (capacity > 0) {                   //если больше то
+            elements = new Object[capacity]; //записываем в новый массив обьектов где будет хранниться величина
+        } else if (capacity == 0) { // или равно 0 значит лист пустой
+            elements = EMPTY_LIST; // присвоем пустому списку
+        } else { //во всех других случаях выкидываем ошибку нет такой цифры
             throw new IllegalArgumentException("Illegal capacity: " + capacity);
         }
     }
 
-    public MyArrayList(Collection<? extends E> c) {
-        elements = c.toArray();
-        size = elements.length;
+    public MyArrayList(Collection<? extends E> c) { // при передаче коллекции неизвестного параметра унаследуем от нашей
+        elements = c.toArray(); //toArray Возвращает массив, содержащий все элементы в этой коллекции; запишу в elements
+        size = elements.length; //В size записываем длину массива обьекта
     }
 
-    private void checkIndex(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
+    private void checkIndex(int index) { // на вход метод получает индекс
+        if (index < 0 || index >= size) {//если  < 0 или индекс равен или больше целочисленной переменной , размера
+            throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");// кидаем ошибку границы индекса
         }
     }
 
-    private void increaseCapacity(int newCapacity) {
-        elements = Arrays.copyOf(elements, newCapacity);
+    private void increaseCapacity(int newCapacity) { //на вход получаем новую величину
+        elements = Arrays.copyOf(elements, newCapacity);//Копирует указанный массив, обрезает или заполняет нулями
     }
 
-    @Override
+    @Override // переопределяем метод List
     public int size() {
-        return size;
+        return size; //размер
     }
 
-    @Override
+    @Override // переопределяем метод List
     public boolean isEmpty() {
-        return size == 0;
+        return size == 0; //возвратим true
     }
 
     @Override
-    public boolean contains(Object o) {
-        boolean result = false;
+    public boolean contains(Object o) { //проверим на содержание обьекта
+        boolean result = false; // запишем в результат false
         int i = 0;
-        while (i < size && !result) {
-            result = (o == null ? elements[i] == null : o.equals(elements[i]));
+        while (i < size && !result) { // пока размер меньше или результат равен true
+            result = (o == null ? elements[i] == null : o.equals(elements[i]));// проверяем обьект
             i++;
         }
-        return result;
+        return result;// возвращаем результат
     }
 
-    @Override
+    @Override // переопределяем метод List
     public Iterator<E> iterator() {
-        return new MyListIterator();
+        return null; // возратим true если в итерации больше элементов.
     }
 
-    @Override
+    @Override // переопределяем метод List
     public Object[] toArray() {
-        Object[] copy = new Object[size];
+        Object[] copy = new Object[size]; // копируем наш массив обьектов
 
-        for (int i = 0; i < copy.length; i++) {
-            copy[i] = elements[i];
+        for (int i = 0; i < copy.length; i++) { //пробегаемся в цикле
+            copy[i] = elements[i];//заполняя его
         }
-        return copy;
+        return copy; // вернем значение
     }
 
-    @SuppressWarnings("unchecked")
-    @Override
+    @SuppressWarnings("unchecked") //Набор предупреждений, которые должны быть подавлены компилятором
+    @Override // переопределяем метод List
     public <T> T[] toArray(T[] a) {
         T[] copy = a.length < size ? Arrays.copyOf(a, size) : a;
 
@@ -96,7 +95,7 @@ public class MyArrayList<E> implements List<E> {
         return copy;
     }
 
-    @Override
+    @Override // переопределяем метод List
     public boolean add(E e) {
         if (size == elements.length) {
             increaseCapacity(size + CAPACITY_INCREMENT);
@@ -105,7 +104,7 @@ public class MyArrayList<E> implements List<E> {
         return true;
     }
 
-    @Override
+    @Override // переопределяем метод List
     public boolean remove(Object o) {
         if (o == null) {
             for (int i = 0; i < size; i++) {
@@ -125,7 +124,7 @@ public class MyArrayList<E> implements List<E> {
         return false;
     }
 
-    @Override
+    @Override // переопределяем метод List
     public boolean containsAll(Collection<?> c) {
         if (c.size() == 0) {
             return false;
@@ -135,59 +134,60 @@ public class MyArrayList<E> implements List<E> {
         for (int i = 0; i < containElements.length; i++) {
             if (!contains(containElements[i])) {
                 return false;
-            };
+            }
+            ;
         }
         return true;
     }
 
-    @Override
-    public boolean addAll(Collection<? extends E> c) {
-        if (c.size() == 0) {
-            return false;
+    @Override // переопределяем метод List
+    public boolean addAll(Collection<? extends E> c) { // получим коллекцию ,добавим все елементы в коллекцию
+        if (c.size() == 0) {// если наша коллекция "?" равна 0
+            return false; // вернем значение False
         }
 
-        Object[] addElements = c.toArray();
+        Object[] addElements = c.toArray(); // в массив обьектов добавим элементы
 
-        int capacity = elements.length;
-        int newCapacity = size + addElements.length;
+        int capacity = elements.length; // запишем в capacity capacity длину массива обьектов где elements ссылка
+        int newCapacity = size + addElements.length;// в новую величину запишем сумму размера и длины элементов
 
-        if (capacity < newCapacity) {
-            increaseCapacity(newCapacity);
+        if (capacity < newCapacity) { // если старая величина меньше
+            increaseCapacity(newCapacity); // увеличим до новой
         }
-        for (int i = 0; i < addElements.length; i++) {
+        for (int i = 0; i < addElements.length; i++) {// в цикле добавим ко всем индексам размер
             elements[i + size] = addElements[i];
         }
-        size += addElements.length;
-        return true;
+        size += addElements.length; // в размер положим сумму
+        return true;// веренем
     }
 
-    @Override
-    public boolean addAll(int index, Collection<? extends E> c) {
+    @Override // переопределяем метод List
+    public boolean addAll(int index, Collection<? extends E> c) { //Добавляем в коллекцию всех элементов по индексу
         checkIndex(index);
 
-        if (c.size() == 0) {
-            return false;
+        if (c.size() == 0) {//если  наша "?" коллекция равна 0
+            return false; // вернем
         }
 
-        Object[] addElements = c.toArray();
+        Object[] addElements = c.toArray(); // запишем в массив обьектов все элементы коллекции
 
-        int capacity = elements.length;
-        int newCapacity = size + addElements.length;
+        int capacity = elements.length;// запишем в capacity capacity длину массива обьектов где elements ссылка
+        int newCapacity = size + addElements.length;// в новую величину запишем сумму размера и длины элементов
 
-        if (capacity < newCapacity) {
-            increaseCapacity(newCapacity);
+        if (capacity < newCapacity) {// если старая величина меньше
+            increaseCapacity(newCapacity);// увеличим до новой
         }
-        for (int i = size - 1; i >= index; i--) {
+        for (int i = size - 1; i >= index; i--) { // в цикле заменим элементы
             elements[i + addElements.length] = elements[i];
         }
-        for (int i = 0; i < addElements.length; i++) {
+        for (int i = 0; i < addElements.length; i++) {//пробежим по всем индексам и добавим элемент
             elements[i + index] = addElements[i];
         }
-        size += addElements.length;
+        size += addElements.length; // в размер положим сумму
         return true;
     }
 
-    @Override
+    @Override // переопределяем метод List
     public boolean removeAll(Collection<?> c) {
         if (c.size() == 0) {
             return false;
@@ -204,7 +204,7 @@ public class MyArrayList<E> implements List<E> {
         return result;
     }
 
-    @Override
+    @Override // переопределяем метод List
     public boolean retainAll(Collection<?> c) {
         int oldSize = size;
 
@@ -223,7 +223,7 @@ public class MyArrayList<E> implements List<E> {
         return (oldSize != size);
     }
 
-    @Override
+    @Override // переопределяем метод List
     public void clear() {
         for (int i = 0; i < size; i++) {
             elements[i] = null;
@@ -232,14 +232,14 @@ public class MyArrayList<E> implements List<E> {
     }
 
     @SuppressWarnings("unchecked")
-    @Override
+    @Override// переопределяем метод List
     public E get(int index) {
         checkIndex(index);
         return (E) elements[index];
     }
 
     @SuppressWarnings("unchecked")
-    @Override
+    @Override // переопределяем метод List
     public E set(int index, E element) {
         checkIndex(index);
         E oldValue = (E) elements[index];
@@ -247,7 +247,7 @@ public class MyArrayList<E> implements List<E> {
         return oldValue;
     }
 
-    @Override
+    @Override// переопределяем метод List
     public void add(int index, E element) {
         checkIndex(index);
         elements = Arrays.copyOf(elements, size + 1);
@@ -259,7 +259,7 @@ public class MyArrayList<E> implements List<E> {
     }
 
     @SuppressWarnings("unchecked")
-    @Override
+    @Override // переопределяем метод List
     public E remove(int index) {
         checkIndex(index);
         E element = (E) elements[index];
@@ -270,7 +270,7 @@ public class MyArrayList<E> implements List<E> {
         return element;
     }
 
-    @Override
+    @Override // переопределяем метод List
     public int indexOf(Object o) {
         boolean result = false;
         int i = 0;
@@ -281,7 +281,7 @@ public class MyArrayList<E> implements List<E> {
         return (result ? i - 1 : -1);
     }
 
-    @Override
+    @Override // переопределяем метод List
     public int lastIndexOf(Object o) {
         if (o == null) {
             for (int i = size - 1; i >= 0; i--) {
@@ -299,14 +299,14 @@ public class MyArrayList<E> implements List<E> {
         return -1;
     }
 
-    @Override
+    @Override // переопределяем метод List
     public ListIterator<E> listIterator() {
-        return new MyListIterator(0);
+        return null;
     }
 
-    @Override
+    @Override // переопределяем метод List
     public ListIterator<E> listIterator(int index) {
-        return new MyListIterator(index);
+        return null;
     }
 
     static void checkIndexRange(int fromIndex, int toIndex, int size) {
@@ -318,111 +318,9 @@ public class MyArrayList<E> implements List<E> {
             throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
     }
 
-    @Override
+    @Override // переопределяем метод List
     public List<E> subList(int fromIndex, int toIndex) {
-        checkIndexRange(fromIndex, toIndex, size);
-        return new MySubList(this, fromIndex, toIndex);
-        //throw new UnsupportedOperationException("subList");
+      return null;
     }
 
-    private class MySubList extends MyArrayList<E> {
-        private final List<E> parent;
-        private final int fromIndex;
-        private final int toIndex;
-
-        MySubList(MyArrayList<E> parent, int fromIndex, int toIndex) {
-            this.parent = parent;
-            this.fromIndex = fromIndex;
-            this.toIndex = toIndex;
-        }
-
-    }
-
-    private class MyListIterator implements ListIterator<E> {
-
-        int cursor;
-        int lastRet = -1;
-
-        MyListIterator() {
-
-        }
-
-        MyListIterator(int index) {
-            cursor = index;
-        }
-
-        @Override
-        public boolean hasNext() {
-            return cursor != size;
-        }
-
-        @SuppressWarnings("unchecked")
-        @Override
-        public E next() {
-            int i = cursor;
-            if (i >= size) {
-                throw new NoSuchElementException();
-            }
-            Object[] elements = MyArrayList.this.elements;
-            cursor = i + 1;
-            lastRet = i;
-            return (E) elements[i];
-        }
-
-        @Override
-        public void remove() {
-            if (lastRet < 0) {
-                throw new IllegalStateException();
-            }
-            MyArrayList.this.remove(lastRet);
-            cursor = lastRet;
-            lastRet = -1;
-        }
-
-        @Override
-        public boolean hasPrevious() {
-            return cursor != 0;
-        }
-
-        @SuppressWarnings("unchecked")
-        @Override
-        public E previous() {
-            int i = cursor - 1;
-            if (i < 0) {
-                throw new NoSuchElementException();
-            }
-            Object[] elements = MyArrayList.this.elements;
-            cursor = i;
-            lastRet = i;
-            return (E) elements[i];
-        }
-
-        @Override
-        public int nextIndex() {
-            return cursor;
-        }
-
-        @Override
-        public int previousIndex() {
-            return cursor - 1;
-        }
-
-
-        @Override
-        public void set(E e) {
-            if (lastRet < 0) {
-                throw new IllegalStateException();
-            }
-            MyArrayList.this.set(lastRet, e);
-        }
-
-        @Override
-        public void add(E e) {
-            int i = cursor;
-            MyArrayList.this.add(i, e);
-            cursor = i + 1;
-            lastRet = -1;
-        }
-
-    }
 }

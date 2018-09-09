@@ -168,6 +168,7 @@ public class MyArrayListTest {
 
     @Test
     public void testIndexOf() {
+
         assertEquals(0, myList.indexOf("one"));
     }
 

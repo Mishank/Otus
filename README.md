@@ -13,6 +13,10 @@ klimakov@otus.ru
 ```bash
 Check branch Polymorphism
 ```
+### TypeScript (Second task)
+```bash
+Check branch typescript
+```
 
 
 ### Lesson 1-Maven

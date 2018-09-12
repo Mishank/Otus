@@ -309,14 +309,7 @@ public class MyArrayList<E> implements List<E> { //создадим и унас�
         return null;
     }
 
-    static void checkIndexRange(int fromIndex, int toIndex, int size) {
-        if (fromIndex < 0)
-            throw new IndexOutOfBoundsException("fromIndex = " + fromIndex);
-        if (toIndex > size)
-            throw new IndexOutOfBoundsException("toIndex = " + toIndex);
-        if (fromIndex > toIndex)
-            throw new IllegalArgumentException("fromIndex(" + fromIndex + ") > toIndex(" + toIndex + ")");
-    }
+
 
     @Override // переопределяем метод List
     public List<E> subList(int fromIndex, int toIndex) {

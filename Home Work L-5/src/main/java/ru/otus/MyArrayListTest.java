@@ -2,9 +2,7 @@ package ru.otus;
 import static org.junit.Assert.*;
 
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import org.junit.After;
 import org.junit.Before;
@@ -44,12 +42,6 @@ public class MyArrayListTest {
         assertTrue(myList.contains("one"));
     }
 
-    @Test
-    public void testIterator() {
-        Iterator<String> iterator = myList.iterator();
-        assertNotNull(iterator);
-        assertTrue(iterator.hasNext());
-    }
 
     @Test
     public void testToArray() {
@@ -179,42 +171,5 @@ public class MyArrayListTest {
         assertEquals(4, myList.lastIndexOf("four"));
     }
 
-    @Test
-    public void testListIterator() {
-        ListIterator<String> iterator = myList.listIterator();
-        assertNotNull(iterator);
-        assertTrue(iterator.hasNext());
-        assertFalse(iterator.hasPrevious());
-        iterator.next();
-        assertTrue(iterator.hasPrevious());
-        assertTrue(iterator.hasNext());
-    }
 
-    @Test
-    public void testListIteratorInt() {
-        ListIterator<String> iterator = myList.listIterator(3);
-        assertNotNull(iterator);
-        assertEquals(3, iterator.nextIndex());
-        iterator.next();
-        assertFalse(iterator.hasNext());
-        assertTrue(iterator.hasPrevious());
-        iterator.previous();
-        assertTrue(iterator.hasPrevious());
-        assertTrue(iterator.hasNext());
-    }
-
-    @Test
-    public void testSubList() {
-        assertNotNull(myList.subList(0, myList.size()));
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSubListInvalidRange() {
-        myList.subList(myList.size(), 0);
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void testSubListInvalidIndex() {
-        myList.subList(-1, myList.size());
-    }
 }

@@ -5,13 +5,15 @@ class Benchmark implements BenchmarkMBean {
 
     @SuppressWarnings("InfiniteLoopStatement")
     void run() {
-
+        int local = size;
+        Object[] array = new Object[local];
         System.out.println("Starting the loop");
-        while (true) { // в цикле создадим обьекты массива и заполним пустыми строками
-            int local = size;
-            Object[] array = new Object[local];
-            System.out.println("Array of size: " + array.length + " created");
 
+
+         while (true) { // в цикле создадим обьекты массива и заполним пустыми строками
+
+
+            System.out.println("Array of size: " + array.length + " created");
             for (int i = 0; i < local; i++) {
                 array[i] = new String(new char[0]);
             }

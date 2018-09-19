@@ -57,4 +57,8 @@ mvn package
 ```bash
 • java.util.Collections
 ```
-
+### Lesson 7-Garbage collector
+```bash
+Check Home Work L-7
+mvn package
+```

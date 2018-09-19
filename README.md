@@ -62,3 +62,9 @@ mvn package
 Check Home Work L-7
 mvn package
 ```
+
+### Lesson 8-JUnit (Lecture)
+
+```bash
+• Test applications
+```

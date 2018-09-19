@@ -7,6 +7,7 @@ class Benchmark implements BenchmarkMBean {
     void run() {
         int local = size;
         Object[] array = new Object[local];
+
         System.out.println("Starting the loop");
 
 

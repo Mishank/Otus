@@ -11,17 +11,17 @@ Oleg Klimakov (Олег Климаков)
 klimakov@otus.ru
 ### Polymorphism (Second task)
 ```bash
-Check branch Polymorphism
+Checkout branch Polymorphism
 ```
 ### TypeScript (Second task)
 ```bash
-Check branch typescript
+Checkout branch typescript
 ```
 
 
 ### Lesson 1-Maven
 ```bash
-Check branch Obfuscation
+Checkout branch Obfuscation
 
 mvn package
 java -cp ./target/Obfuscation-maven.jar ru.otus.Main
@@ -67,4 +67,10 @@ mvn package
 
 ```bash
 • Test applications
+• import org.junit.*;
+```
+
+### Lesson 9-Аnnotation
+```bash
+Check Home Work L-9
 ```
